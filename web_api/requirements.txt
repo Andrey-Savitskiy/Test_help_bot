@@ -1,3 +1,6 @@
 loguru
 flask
 flask-restful
+sqlalchemy
+psycopg2
+sqlalchemy-utils

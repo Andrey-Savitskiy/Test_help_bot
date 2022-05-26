@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, Integer, String, Column, DateTime, BigInte
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
-from loader import DB_HOST, DB_PASS, DB_USER, DB_DB
+from web_api.config import DB_HOST, DB_PASS, DB_USER, DB_DB
 
 
 engine = create_engine(f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_DB}")
