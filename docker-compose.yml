@@ -1,0 +1,44 @@
+version: '3.1'
+
+services:
+
+  helper_db:
+    image: postgres
+    restart: always
+    container_name: ${POSTGRES_HOST}
+    links:
+      - helper_web
+    env_file:
+      - .env
+    volumes:
+      - helper_db:/var/lib/postgresql/data
+
+  helper_web:
+    build:
+      context: .
+      dockerfile: web_api/Dockerfile
+    image: helper_web
+    container_name: helper_web
+    links:
+      - helper_db
+    env_file:
+      - .env
+    volumes:
+      - ${PHOTO_PATH}:${PHOTO_PATH}
+    restart: always
+    working_dir: /web_api
+
+  helper_bot:
+    build:
+      context: .
+      dockerfile: bot/Dockerfile
+    image: helper_bot
+    container_name: helper_bot
+    links:
+      - helper_db
+    env_file:
+      - .env
+    volumes:
+      - ${PHOTO_PATH}:${PHOTO_PATH}
+    restart: always
+    working_dir: /bot

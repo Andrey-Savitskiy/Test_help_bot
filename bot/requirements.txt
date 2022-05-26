@@ -1,0 +1,7 @@
+python-telegram-bot==13.11
+loguru
+python-dotenv
+sqlalchemy
+psycopg2
+sqlalchemy-utils
+requests
