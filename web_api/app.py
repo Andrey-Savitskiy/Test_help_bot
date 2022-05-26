@@ -19,8 +19,8 @@ class Feedbackes(Resource):
             FeedBacks.feedback,
             FeedBacks.photo,
         ).all()
-
-        return json.dumps(response)
+        result = [row.__dict__ for row in response]
+        return json.dumps(result)
 
     @logger.catch()
     def get(self):
