@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Resource, Api
-from web_api.db_api.db import FeedBacks, session
+from db_api.db import FeedBacks, session
 import json
 from config import *
 
