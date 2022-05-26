@@ -2,7 +2,7 @@ from typing import Any
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import CallbackContext
 
-from bot.config import SETTINGS, logger, END_CONDITION
+from config import SETTINGS, logger, END_CONDITION
 
 
 @logger.catch()
