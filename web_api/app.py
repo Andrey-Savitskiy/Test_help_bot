@@ -31,4 +31,4 @@ api.add_resource(Feedbackes, '/')
 
 
 if __name__ == '__main__':
-    app.run(host='217.25.93.149', debug=False)
+    app.run(host='0.0.0.0', debug=False)
