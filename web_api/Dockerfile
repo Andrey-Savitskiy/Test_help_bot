@@ -4,5 +4,5 @@ WORKDIR /web_api
 COPY ./web_api/requirements.txt /web_api/requirements.txt
 
 RUN pip install --no-cache-dir -r requirements.txt
-COPY ./web_api /web_api
+COPY . .
 CMD ["python3", "app.py"]
