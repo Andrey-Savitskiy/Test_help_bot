@@ -11,16 +11,16 @@ api = Api(app)
 
 class Feedbackes(Resource):
     def get_data(self) -> json:
-        response = session.query(
+        query = session.query(
             FeedBacks.tg_id,
             FeedBacks.created_on,
             FeedBacks.username,
             FeedBacks.end,
             FeedBacks.feedback,
             FeedBacks.photo,
-        ).all()
+        )
 
-        result = [x.serialize for x in response]
+        result = [x.serialize for x in query.all()]
         return json.dumps(result)
 
     @logger.catch()
