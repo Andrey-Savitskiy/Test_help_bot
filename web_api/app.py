@@ -20,7 +20,7 @@ class Feedbackes(Resource):
             FeedBacks.photo,
         )
 
-        result = [x.serialize for x in query.all()]
+        result = [dict(row) for row in query.all()]
         return json.dumps(result)
 
     @logger.catch()
