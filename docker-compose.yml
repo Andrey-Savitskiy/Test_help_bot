@@ -19,8 +19,6 @@ services:
       dockerfile: web_api/Dockerfile
     image: helper_web
     container_name: helper_web
-    links:
-      - helper_db
     env_file:
       - .env
     volumes:
