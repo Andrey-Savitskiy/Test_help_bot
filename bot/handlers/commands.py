@@ -6,9 +6,9 @@ from telegram.ext import CommandHandler, CallbackQueryHandler, CallbackContext, 
     Filters
 import requests
 
-from bot.handlers.callbacks import button
-from bot.config import updater, SETTINGS, logger, END_CONDITION, PHOTO_PATH
-from web_api.db_api.db import session, FeedBacks
+from handlers.callbacks import button
+from config import updater, SETTINGS, logger, END_CONDITION, PHOTO_PATH
+from db_api.db import session, FeedBacks
 
 
 @logger.catch()
