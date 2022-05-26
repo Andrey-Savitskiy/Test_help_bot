@@ -19,7 +19,8 @@ class Feedbackes(Resource):
             FeedBacks.feedback,
             FeedBacks.photo,
         ).all()
-        result = [row.__dict__ for row in response]
+
+        result = [x.serialize for x in response]
         return json.dumps(result)
 
     @logger.catch()

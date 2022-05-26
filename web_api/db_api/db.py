@@ -25,6 +25,18 @@ class FeedBacks(Base):
     end = Column(String(4), nullable=False)
     photo = Column(String(64), default=False)
 
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'tg_id': self.tg_id,
+            'created_on': self.created_on,
+            'username': self.username,
+            'end': self.end,
+            'feedback': self.feedback,
+            'photo': self.photo,
+        }
+
 Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
