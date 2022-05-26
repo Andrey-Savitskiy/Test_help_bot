@@ -4,7 +4,6 @@ services:
 
   helper_db:
     image: postgres
-    restart: always
     container_name: ${POSTGRES_HOST}
     links:
       - helper_web
@@ -21,7 +20,6 @@ services:
       - .env
     volumes:
       - ${PHOTO_PATH}:${PHOTO_PATH}
-    restart: always
     working_dir: /web_api
 
   helper_bot:
@@ -36,5 +34,4 @@ services:
       - .env
     volumes:
       - ${PHOTO_PATH}:${PHOTO_PATH}
-    restart: always
     working_dir: /bot
