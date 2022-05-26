@@ -19,7 +19,7 @@ class FeedBacks(Base):
     __tablename__ = 'feedbacks'
     id = Column(Integer(), primary_key=True, autoincrement=True)
     tg_id = Column(BigInteger(), nullable=False)
-    created_on = Column(DateTime(), default=datetime.now)
+    created_on = Column(DateTime(), default=str(datetime.now))
     username = Column(String(32), nullable=False)
     feedback = Column(String(), nullable=False)
     end = Column(String(4), nullable=False)
