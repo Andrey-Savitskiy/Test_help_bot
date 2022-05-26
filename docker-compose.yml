@@ -10,8 +10,6 @@ services:
       - helper_web
     env_file:
       - .env
-    volumes:
-      - .:/var/lib/postgresql/data
 
   helper_web:
     build:
