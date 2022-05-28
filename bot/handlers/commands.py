@@ -84,6 +84,7 @@ def feedback(update: Update, context: CallbackContext) -> Any:
 
 @logger.catch()
 def dialog(update: Update, context: CallbackContext) -> None:
+    update.message.delete()
     update.message.reply_text(SETTINGS['dialog'])
 
 
