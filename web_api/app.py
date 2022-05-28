@@ -9,7 +9,7 @@ app = Flask(__name__)
 api = Api(app)
 
 
-class Feedbackes(Resource):
+class App(Resource):
     def get_data(self) -> json:
         query = session.query(
             FeedBacks.tg_id,
@@ -21,15 +21,15 @@ class Feedbackes(Resource):
         )
 
         result = [dict(row) for row in query.all()]
-        return json.dumps(result)
+        return result
 
     @logger.catch()
     def get(self):
         return self.get_data()
 
 
-api.add_resource(Feedbackes, '/')
+api.add_resource(App, '/')
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=False)
+    app.run(debug=False, host='0.0.0.0')

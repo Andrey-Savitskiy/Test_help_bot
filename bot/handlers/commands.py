@@ -17,11 +17,12 @@ def start(update: Update, context: CallbackContext) -> None:
 
 
 @logger.catch()
-def help_command(update: Update, context: CallbackContext) -> None:
+def help_command(update: Update, context: CallbackContext) -> str:
     keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(SETTINGS[key]['title'], callback_data=key)]
                                      for key in SETTINGS['A2']['keyboard']])
 
     update.message.reply_text(SETTINGS['A2']['title'], reply_markup=keyboard)
+    return 'dialog'
 
 
 @logger.catch()
@@ -34,7 +35,7 @@ def download_file(link: str) -> Any:
             file.write(photo.content)
             return file_name
     except Exception as error:
-        logger.error(error)
+        logger.error(error, error.__traceback__)
         return False
 
 
@@ -66,14 +67,14 @@ def feedback(update: Update, context: CallbackContext) -> Any:
                 end=END_CONDITION[tg_id]
             )
     except KeyError as error:
-        logger.error(error)
+        logger.error(error, error.__traceback__)
         return update.message.reply_text(SETTINGS['error'])
 
     try:
         session.add(record)
         session.commit()
     except Exception as error:
-        logger.error(error)
+        logger.error(error, error.__traceback__)
         return update.message.reply_text(SETTINGS['error'])
 
     END_CONDITION.pop(tg_id)
@@ -81,9 +82,16 @@ def feedback(update: Update, context: CallbackContext) -> Any:
     return -1
 
 
+@logger.catch()
+def dialog(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text(SETTINGS['dialog'])
+
+
 conv_handler = ConversationHandler(
-    entry_points=[CallbackQueryHandler(button)],
+    entry_points=[CommandHandler('help', help_command)],
     states={
+        'dialog': [CallbackQueryHandler(button),
+                   MessageHandler(Filters.all, dialog)],
         'feedback': [MessageHandler(Filters.text, feedback),
                      MessageHandler(Filters.photo, feedback)]
     },
@@ -91,4 +99,4 @@ conv_handler = ConversationHandler(
 )
 updater.dispatcher.add_handler(conv_handler)
 updater.dispatcher.add_handler(CommandHandler('start', start))
-updater.dispatcher.add_handler(CommandHandler('help', help_command))
+# updater.dispatcher.add_handler(CommandHandler('help', help_command))
