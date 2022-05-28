@@ -33,6 +33,8 @@ def button(update: Update, context: CallbackContext) -> Any:
 
         if 48 > int(data[1:]) > 16:
             return 'feedback'
+        else:
+            return -1
 
 
 # updater.dispatcher.add_handler(CallbackQueryHandler(button))
